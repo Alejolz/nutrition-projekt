@@ -41,7 +41,7 @@ app.post('/', async (req, res) => {
   // Si el mensaje tiene texto
   if (msgBody) {
     try {
-      await whatsapp.sendText(from, `Recibí tu mensaje: ${msgBody}`);
+      await whatsapp.sendText(from, `Gracias por contactarte con nutritoche`);
       await whatsapp.enviarOpcionesIniciales(from)
       console.log('[Webhook POST] Respuesta enviada correctamente');
     } catch (error) {
