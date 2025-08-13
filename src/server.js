@@ -42,6 +42,7 @@ app.post('/', async (req, res) => {
   if (msgBody) {
     try {
       await whatsapp.sendText(from, `Recibí tu mensaje: ${msgBody}`);
+      await whatsapp.enviarOpcionesIniciales(from)
       console.log('[Webhook POST] Respuesta enviada correctamente');
     } catch (error) {
       console.error('[Webhook POST] Error enviando respuesta:', error);
