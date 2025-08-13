@@ -3,7 +3,7 @@ const app = express();
 
 app.get('/', (req, res) => {
   console.log('[GET /] Petición recibida');
-  res.send('Chatbot activo 🚀');
+  res.send('Chatbot activooo 🚀');
 });
 
 const PORT = process.env.PORT || 3000;
