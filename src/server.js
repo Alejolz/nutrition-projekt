@@ -6,7 +6,7 @@ const whatsapp = require('./whatsapp');
 app.use(express.json());
 
 // Verificación webhook (GET)
-app.get('/', (req, res) => {
+app.get('/webhook', (req, res) => {
   const verifyToken = process.env.VERIFY_TOKEN;
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
