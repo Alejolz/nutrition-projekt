@@ -46,11 +46,6 @@ async function enviarOpcionesIniciales(to) {
                 id: "preguntar_ia",
                 title: "Hablar con la IA",
                 description: "Puedes hacer preguntas"
-              },
-              {
-                id: "hablar_asesor",
-                title: "Hablar con un asesor",
-                description: "Conecta con un asesor humano"
               }
             ]
           }
