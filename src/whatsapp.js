@@ -28,7 +28,7 @@ async function enviarOpcionesIniciales(to) {
     type: "interactive",
     interactive: {
       type: "list",
-      header: { type: "text", text: "Bienvenido 👋" },
+      header: { type: "text", text: "alo 👋" },
       body: { text: "Selecciona una opción para continuar:" },
       footer: { text: "Bot" },
       action: {
