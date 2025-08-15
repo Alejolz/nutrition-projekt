@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { getMenu } = require('../database/menuService');
 
 const token = process.env.WHATSAPP_TOKEN;
 const phoneId = process.env.PHONE_NUMBER_ID;
@@ -22,32 +23,33 @@ async function sendText(to, body) {
 }
 
 async function enviarOpcionesIniciales(to) {
+  const menu = await getMenu('user', 1);
+
+  if (!menu) {
+    return sendText(to, 'No se encontró un menú configurado.');
+  }
+
+  const rows = menu.options.map(opt => ({
+    id: opt.id,
+    title: opt.title,
+    description: opt.description
+  }));
+
   const payload = {
     messaging_product: "whatsapp",
     to,
     type: "interactive",
     interactive: {
       type: "list",
-      header: { type: "text", text: "Hola guap@👋" },
-      body: { text: "Selecciona una opción para continuar:" },
+      header: { type: "text", text: menu.title },
+      body: { text: menu.description || "Selecciona una opción para continuar:" },
       footer: { text: "Bot" },
       action: {
         button: "Ver opciones",
         sections: [
           {
             title: "Opciones disponibles",
-            rows: [
-              {
-                id: "analizar_imagen",
-                title: "Analizar imagen",
-                description: "Envía una imagen para que la analice"
-              },
-              {
-                id: "preguntar_ia",
-                title: "Hablar con la IA",
-                description: "Puedes hacer preguntas"
-              }
-            ]
+            rows
           }
         ]
       }
@@ -66,4 +68,4 @@ async function enviarOpcionesIniciales(to) {
   }
 }
 
-module.exports = { sendText, enviarOpcionesIniciales};
+module.exports = { sendText, enviarOpcionesIniciales };
