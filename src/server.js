@@ -27,29 +27,26 @@ app.post('/', async (req, res) => {
   console.log('[Webhook POST] Payload recibido:', JSON.stringify(req.body));
   res.sendStatus(200); // siempre responder rápido
 
-  const message = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
-  if (!message) {
-    console.log('[Webhook POST] No se encontró mensaje en el payload');
-    return;
-  }
+  // const message = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+  // if (!message) {
+  //   console.log('[Webhook POST] No se encontró mensaje en el payload');
+  //   return;
+  // }
 
-  const from = message.from; // número del usuario
-  const msgBody = message.text?.body;
+  // const from = message.from; // número del usuario
+  // const msgBody = message.text?.body;
 
-  console.log(`[Webhook POST] Mensaje de ${from}: ${msgBody}`);
+  // console.log(`[Webhook POST] Mensaje de ${from}: ${msgBody}`);
 
   // Si el mensaje tiene texto
-  if (msgBody) {
     try {
-      await whatsapp.sendText(from, `Gracias por contactarte con nutritoche`);
-      await whatsapp.enviarOpcionesIniciales(from)
+      // await whatsapp.sendText(from, `Gracias por contactarte con nutritoche`);
+      // await whatsapp.enviarOpcionesIniciales(from)
+      await whatsapp.handleMessage(req.body)
       console.log('[Webhook POST] Respuesta enviada correctamente');
     } catch (error) {
       console.error('[Webhook POST] Error enviando respuesta:', error);
     }
-  } else {
-    console.log('[Webhook POST] Mensaje sin texto recibido');
-  }
 });
 
 // app.get('/', (req, res) => {
